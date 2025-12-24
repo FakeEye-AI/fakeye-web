@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLocation, useNavigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LandingPage } from './components/LandingPage';
 import { ImageDetector } from './components/ImageDetector';
 import { VideoDetector } from './components/VideoDetector';
@@ -8,17 +8,26 @@ import { ChromeExtension } from './components/ChromeExtension';
 import { History } from './components/History';
 import { Community } from './components/Community';
 import { Auth } from './components/Auth';
+import { TermsOfService } from './components/TermsOfService';
 import { HistoryProvider } from './context/HistoryContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CommunityProvider } from './context/CommunityContext';
-import { Shield, Image, Video, FileText, Mail, Chrome, Clock, Users, LogOut, User } from 'lucide-react';
-import logo from 'figma:asset/7c998382e7eabe0e998171758cc152069661fe31.png';
-
-type TabType = 'landing' | 'image' | 'video' | 'text' | 'email' | 'extension' | 'history' | 'community';
+import { routes, getRouteByPath, TabType } from './routes/routeConfig';
+import { Image, Video, FileText, Mail, Chrome, Clock, Users, LogOut, User } from 'lucide-react';
+import logo from './assets/logo.png';
 
 function AppContent() {
-  const [activeTab, setActiveTab] = useState<TabType>('landing');
+  const location = useLocation();
+  const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
+
+  const currentRoute = getRouteByPath(location.pathname);
+  const activeTab = (currentRoute?.id || 'landing') as TabType;
+
+  const handleNavigate = (tab: TabType) => {
+    const route = routes.find(r => r.id === tab);
+    if (route) navigate(route.path);
+  };
 
   const tabs = [
     { id: 'image' as TabType, label: 'Image Detection', icon: Image },
@@ -38,39 +47,42 @@ function AppContent() {
         <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActiveTab('landing')}>
+              <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigate('landing')}>
                 <img src={logo} alt="FakeEye" className="h-10" />
-                <span className="text-gray-900">FakeEye</span>
+                <div>
+                <h1 className="text-gray-900">FakeEye</h1>
+                <p className="text-sm text-gray-600">AI Content Detection Platform</p>
+              </div>
               </div>
               
               {/* Navigation Links */}
               <nav className="hidden md:flex items-center gap-6">
                 <button 
-                  onClick={() => setActiveTab('image')}
+                  onClick={() => handleNavigate('image')}
                   className="text-[#018790] hover:text-[#005461] transition-colors"
                 >
                   Features
                 </button>
                 <button 
-                  onClick={() => setActiveTab('extension')}
+                  onClick={() => handleNavigate('extension')}
                   className="text-[#018790] hover:text-[#005461] transition-colors"
                 >
                   How It Works
                 </button>
                 <button 
-                  onClick={() => setActiveTab('history')}
+                  onClick={() => handleNavigate('history')}
                   className="text-[#018790] hover:text-[#005461] transition-colors"
                 >
                   Dashboard
                 </button>
                 <button 
-                  onClick={() => setActiveTab('community')}
+                  onClick={() => handleNavigate('community')}
                   className="text-[#018790] hover:text-[#005461] transition-colors"
                 >
                   Community
                 </button>
                 <button 
-                  onClick={() => setActiveTab('extension')}
+                  onClick={() => handleNavigate('extension')}
                   className="text-[#018790] hover:text-[#005461] transition-colors"
                 >
                   Extension
@@ -100,17 +112,17 @@ function AppContent() {
                 </div>
               ) : (
                 <button
-                  onClick={() => setActiveTab('community')}
+                  onClick={() => handleNavigate('community')}
                   className="px-6 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors"
                 >
-                  Sign Up Free
+                  Sign Up
                 </button>
               )}
             </div>
           </div>
         </header>
 
-        <LandingPage onGetStarted={() => setActiveTab('image')} />
+        <LandingPage onGetStarted={() => handleNavigate('image')} />
       </div>
     );
   }
@@ -121,7 +133,7 @@ function AppContent() {
       <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveTab('landing')}>
+            <div className="flex items-center gap-4 cursor-pointer" onClick={() => handleNavigate('landing')}>
               <img src={logo} alt="FakeEye" className="h-10" />
               <div>
                 <h1 className="text-gray-900">FakeEye</h1>
@@ -151,7 +163,7 @@ function AppContent() {
               </div>
             ) : (
               <button
-                onClick={() => setActiveTab('community')}
+                onClick={() => handleNavigate('community')}
                 className="flex items-center gap-2 px-4 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors"
               >
                 <User className="w-4 h-4" />
@@ -171,7 +183,7 @@ function AppContent() {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleNavigate(tab.id)}
                   className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'border-[#018790] text-[#005461]'
@@ -196,6 +208,7 @@ function AppContent() {
         {activeTab === 'extension' && <ChromeExtension />}
         {activeTab === 'history' && <History />}
         {activeTab === 'community' && (isAuthenticated ? <Community /> : <Auth />)}
+        {activeTab === 'terms' && <TermsOfService onBack={() => handleNavigate('landing')} />}
       </main>
 
       {/* Footer */}
@@ -212,12 +225,24 @@ function AppContent() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <HistoryProvider>
-        <CommunityProvider>
-          <AppContent />
-        </CommunityProvider>
-      </HistoryProvider>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <HistoryProvider>
+          <CommunityProvider>
+            <Routes>
+              <Route path="/" element={<AppContent />} />
+              <Route path="/image-detection" element={<AppContent />} />
+              <Route path="/video-detection" element={<AppContent />} />
+              <Route path="/text-detection" element={<AppContent />} />
+              <Route path="/email-detection" element={<AppContent />} />
+              <Route path="/extension" element={<AppContent />} />
+              <Route path="/history" element={<AppContent />} />
+              <Route path="/community" element={<AppContent />} />
+              <Route path="/terms-of-service" element={<AppContent />} />
+            </Routes>
+          </CommunityProvider>
+        </HistoryProvider>
+      </AuthProvider>
+    </Router>
   );
 }

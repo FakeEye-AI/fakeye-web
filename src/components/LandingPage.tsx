@@ -197,12 +197,22 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             onClick={onGetStarted}
             className="bg-white text-[#005461] px-8 py-3 rounded-lg hover:bg-[#F4F4F4] transition-colors shadow-lg inline-flex items-center gap-2"
           >
-            Sign Up Free
+            Sign Up
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
+
+<footer className="bg-white border-t border-gray-200 mt-4">
+  <div className="max-w-7xl mx-auto px-4 py-2">
+    <p className="text-center text-gray-600 text-140s">
+      © 2025 Fakeye. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+
       </div>
     </div>
   );
