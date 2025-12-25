@@ -119,7 +119,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under a proprietary license. See the [LICENSE](https://github.com/FakeEye-AI/FakeEye-Frontend/blob/main/LICENSE) file for details.
+This project is licensed under a proprietary license. See the [LICENSE](https://github.com/FakeEye-AI/fakeye-web/blob/main/LICENSE) file for details.
 
 ---
 
