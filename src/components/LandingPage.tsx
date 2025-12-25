@@ -212,13 +212,95 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
 
 
-<footer className="bg-white border-t border-gray-200 mt-4">
-  <div className="max-w-7xl mx-auto px-4 py-2">
-    <p className="text-center text-gray-600 text-140s">
-      © 2025 Fakeye. All rights reserved.
-    </p>
-  </div>
-</footer>
+<footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-300 border-t border-slate-700">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Brand Section */}
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <Shield className="w-6 h-6 text-cyan-400" />
+              <h3 className="text-xl font-bold text-white">FakeEye</h3>
+            </div>
+            <p className="text-sm text-gray-400 leading-relaxed pr-4">
+              Protecting you from digital deception with AI-powered detection.
+            </p>
+          </div>
+
+          {/* Product Section */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Features
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  API
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company Section */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Careers
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Section */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Privacy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Terms
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-slate-700">
+          <p className="text-center text-sm text-gray-500">
+            © 2024 FakeEye. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
 
 
       </div>
