@@ -1,6 +1,5 @@
 import { Shield, Users, Zap, Download, Play, CheckCircle } from 'lucide-react';
 import Footer from './Footer';
-
 interface LandingPageProps {
   onGetStarted: () => void;
 }
@@ -13,11 +12,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+            {/* Trust Badge align to center layout*/}
+            <div className="text-center">
+              <div className="text-center inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
               <div className="w-2 h-2 bg-[#00B7B5] rounded-full animate-pulse" />
               <span className="text-sm text-gray-700">Trusted by 50,000+ users worldwide</span>
+              </div>
+
             </div>
+            
 
             {/* Main Heading */}
             <div className="text-center">
@@ -27,8 +30,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                   with AI in Seconds
                 </span>
               </h1>
-              <p className="text-gray-600 text-lg max-w-xl mx-auto mt-6">
-                Protect yourself from deepfakes, manipulated media, and phishing attacks. Our AI-powered platform analyzes images, videos, text, and emails with industry-leading accuracy.
+              <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl">
+                Protect yourself from deepfakes, manipulated media, and phishing attacks. 
+                Our AI-powered platform analyzes images, videos, text, and emails with 
+                industry-leading accuracy.
               </p>
             </div>
 
@@ -205,6 +210,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </svg>
           </button>
         </div>
+
 
 <footer className="bg-white border-t border-gray-200 mt-4">
   <div className="max-w-7xl mx-auto px-4 py-2">
