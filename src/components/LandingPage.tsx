@@ -1,4 +1,5 @@
 import { Shield, Users, Zap, Download, Play, CheckCircle } from 'lucide-react';
+import Footer from './Footer';
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -19,13 +20,14 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </div>
 
             {/* Main Heading */}
-            <div>
-              <h1 className="text-gray-900 mb-4">
+            <div className="text-center">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight" style={{ fontSize: '3.5rem', fontWeight: 800 }}>
                 Detect Fake Content
-                <br />
-                <span className="text-[#018790]">with AI in Seconds</span>
+                <span className="block mt-3 text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent" style={{ background: 'linear-gradient(90deg,#14b8a6,#06b6d4)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                  with AI in Seconds
+                </span>
               </h1>
-              <p className="text-gray-600 text-lg max-w-xl">
+              <p className="text-gray-600 text-lg max-w-xl mx-auto mt-6">
                 Protect yourself from deepfakes, manipulated media, and phishing attacks. Our AI-powered platform analyzes images, videos, text, and emails with industry-leading accuracy.
               </p>
             </div>
