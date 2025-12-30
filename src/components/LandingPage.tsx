@@ -212,6 +212,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
 
 
+
 <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-300 border-t border-slate-700">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -219,7 +220,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Shield className="w-6 h-6 text-cyan-400" />
-              <h3 className="text-xl font-bold text-white">FakeEye</h3>
+              <h3 className="text-xl font-bold text-grey">FakeEye</h3>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed pr-4">
               Protecting you from digital deception with AI-powered detection.
@@ -228,7 +229,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
           {/* Product Section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Product</h4>
+            <h4 className="text-grey font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
@@ -250,7 +251,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
           {/* Company Section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h4 className="text-grey font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
@@ -272,7 +273,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
           {/* Legal Section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
+            <h4 className="text-grey font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-sm text-gray-400 hover:text-cyan-400 transition-colors">
