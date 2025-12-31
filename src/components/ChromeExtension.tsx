@@ -58,9 +58,10 @@ export function ChromeExtension() {
       <div 
         className="fixed top-0 left-0"
         style={{ width: '100vw', height: '100vh', zIndex: 100000, overflowY: 'auto' }}
+        onClick={() => setShowGuide(false)}
       >
         <div className="flex justify-center items-start px-4" style={{ minHeight: '100%', paddingTop: '60px', paddingBottom: '60px' }}>
-          <div className="relative bg-white shadow-2xl w-full max-w-2xl h-fit" style={{ borderRadius: '16px' }}>
+          <div className="relative bg-white shadow-2xl w-full max-w-2xl h-fit" style={{ borderRadius: '16px' }} onClick={(e) => e.stopPropagation()}>
           {/* Modal Header */}
           <div className="bg-gradient-to-r from-[#005461] to-[#018790] text-white p-6" style={{ borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
               <div className="flex items-center justify-between">
