@@ -129,6 +129,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 /**
@@ -170,6 +174,7 @@
       font-size: var(--text-base);
       font-weight: var(--font-weight-medium);
       line-height: 1.5;
+      cursor: pointer;
     }
 
     input {

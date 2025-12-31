@@ -2,9 +2,10 @@ import { Shield, Users, Zap, Download, Play, CheckCircle } from 'lucide-react';
 import Footer from './Footer';
 interface LandingPageProps {
   onGetStarted: () => void;
+  onExtension: () => void;
 }
 
-export function LandingPage({ onGetStarted }: LandingPageProps) {
+export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F4F4F4] via-white to-cyan-50">
       {/* Hero Section */}
@@ -40,13 +41,13 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={onGetStarted}
-                className="flex items-center gap-2 bg-[#018790] text-white px-6 py-3 rounded-lg hover:bg-[#005461] transition-colors shadow-lg shadow-[#018790]/20"
+                onClick={onExtension}
+                className="flex items-center gap-2 bg-[#018790] text-white px-6 py-3 rounded-lg hover:bg-[#005461] transition-colors shadow-lg shadow-[#018790]/20 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download Extension
               </button>
-              <button className="flex items-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+              <button className="flex items-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200 cursor-pointer">
                 <Play className="w-5 h-5" />
                 Watch Demo
               </button>
@@ -202,7 +203,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </p>
           <button
             onClick={onGetStarted}
-            className="bg-white text-[#005461] px-8 py-3 rounded-lg hover:bg-[#F4F4F4] transition-colors shadow-lg inline-flex items-center gap-2"
+            className="bg-white text-[#005461] px-8 py-3 rounded-lg hover:bg-[#F4F4F4] transition-colors shadow-lg inline-flex items-center gap-2 cursor-pointer"
           >
             Sign Up
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
