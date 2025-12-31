@@ -265,8 +265,27 @@ export function History() {
                       {item.metadata?.phishingRisk && (
                         <p className="flex items-center gap-1">
                           <AlertTriangle className="w-3 h-3" />
-                          Phishing Risk: <span className="capitalize">{item.metadata.phishingRisk}</span>
+                          Phishing Risk: <span className={`capitalize font-medium ${
+                            item.metadata.phishingRisk === 'High' ? 'text-red-600' : 
+                            item.metadata.phishingRisk === 'Medium' ? 'text-orange-600' : 
+                            'text-green-600'
+                          }`}>{item.metadata.phishingRisk}</span>
                         </p>
+                      )}
+                      {item.metadata?.flags && item.metadata.flags.length > 0 && (
+                        <div className="mt-2">
+                          <p className="text-gray-700 font-medium mb-1">Suspicious indicators:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {item.metadata.flags.map((flag, idx) => (
+                              <span 
+                                key={idx} 
+                                className="bg-red-50 text-red-700 px-2 py-0.5 rounded text-xs"
+                              >
+                                {flag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       )}
                     </div>
 

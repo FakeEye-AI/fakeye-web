@@ -49,7 +49,24 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
       
-      const results = await chrome.tabs.sendMessage(tab.id, { action: 'scanInbox' });
+      if (!tab || !tab.url || !tab.url.includes('mail.google.com')) {
+        throw new Error('Please open Gmail first');
+      }
+      
+      // Try to send message, if it fails, the content script might not be loaded
+      let results;
+      try {
+        results = await chrome.tabs.sendMessage(tab.id, { action: 'scanInbox' });
+      } catch (e) {
+        // Content script not loaded - try to inject it
+        console.log('Content script not responding, attempting to reload...');
+        statusDiv.innerHTML = '<p style="color: #f0ad4e;">⚠ Please refresh Gmail and try again</p>';
+        throw new Error('Content script not loaded. Please refresh Gmail page.');
+      }
+      
+      if (!results) {
+        throw new Error('No response from content script. Please refresh Gmail page.');
+      }
       
       if (results.error) {
         throw new Error(results.error);

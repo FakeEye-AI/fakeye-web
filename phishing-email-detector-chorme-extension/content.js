@@ -3,21 +3,63 @@
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'scanInbox') {
-    // Return cached results if available and recent (less than 1 minute old)
-    if (autoScanResults && autoScanResults.timestamp && 
-        (Date.now() - autoScanResults.timestamp) < 60000) {
-      sendResponse(autoScanResults);
-    } else {
+    try {
+      // Force rescan - always scan fresh when user clicks the button
       const result = scanInboxForPhishing();
       result.timestamp = Date.now();
       autoScanResults = result;
+      // Save to extension storage for syncing with website
+      saveToExtensionStorage(result);
       sendResponse(result);
+    } catch (error) {
+      console.error('[FakEye] Scan error:', error);
+      sendResponse({ error: error.message || 'Failed to scan inbox' });
     }
   } else if (request.action === 'getAutoScanResults') {
     sendResponse(autoScanResults || { error: 'No scan results available' });
   }
-  return true;
+  return true; // Keep message channel open for async response
 });
+
+// Save scan results to chrome.storage for syncing with FakEye website
+async function saveToExtensionStorage(scanResult) {
+  try {
+    if (!scanResult.success || !scanResult.emails) return;
+    
+    // Get existing history
+    const data = await chrome.storage.local.get(['phishingScanHistory']);
+    const existingHistory = data.phishingScanHistory || [];
+    
+    // Convert suspicious emails to history items
+    const newItems = scanResult.emails
+      .filter(email => email.phishing.isSuspicious)
+      .map(email => ({
+        id: `ext-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        timestamp: scanResult.timestamp,
+        subject: email.subject,
+        sender: email.sender,
+        preview: email.preview,
+        isSuspicious: email.phishing.isSuspicious,
+        riskLevel: email.phishing.riskLevel,
+        score: email.phishing.score,
+        flags: email.phishing.flags
+      }));
+    
+    if (newItems.length > 0) {
+      // Avoid duplicates by checking subject + sender combination
+      const existingKeys = new Set(existingHistory.map(item => `${item.subject}|${item.sender}`));
+      const uniqueNewItems = newItems.filter(item => !existingKeys.has(`${item.subject}|${item.sender}`));
+      
+      if (uniqueNewItems.length > 0) {
+        const updatedHistory = [...uniqueNewItems, ...existingHistory].slice(0, 100); // Keep last 100 items
+        await chrome.storage.local.set({ phishingScanHistory: updatedHistory });
+        console.log(`[FakEye Extension] Saved ${uniqueNewItems.length} suspicious email(s) to storage`);
+      }
+    }
+  } catch (error) {
+    console.error('[FakEye Extension] Error saving to storage:', error);
+  }
+}
 
 function scanInboxForPhishing() {
   try {
@@ -255,8 +297,13 @@ function isInboxView() {
     return false;
   }
   
-  // Explicitly check for inbox
+  // Check if viewing email list (inbox with any page number)
+  // Gmail URL patterns: #inbox, #inbox/p2, #inbox/p3, etc.
+  const inboxPattern = /#inbox(\/p\d+)?$/;
   const isInInbox = url.includes('#inbox') || url.includes('/inbox');
+  
+  // Check if we're inside an email (has message ID in URL)
+  const isInsideEmail = /#inbox\/[A-Za-z0-9]+$/.test(url) && !/#inbox\/p\d+$/.test(url);
   
   // Exclude other views (sent, drafts, spam, trash, etc.)
   const isInOtherView = url.includes('#sent') || url.includes('/sent') ||
@@ -269,8 +316,13 @@ function isInboxView() {
                         url.includes('#label/') || url.includes('/label/') ||
                         url.includes('#category/') || url.includes('/category/');
   
-  // Only return true if explicitly in inbox and not in other views
-  return isInInbox && !isInOtherView;
+  // Return true if in inbox list view (not inside an email) and not in other views
+  return isInInbox && !isInOtherView && !isInsideEmail;
+}
+
+// Check if we're on any Gmail page (for re-scan to work)
+function isOnGmail() {
+  return window.location.href.includes('mail.google.com');
 }
 
 // Auto-scan when page loads
@@ -281,20 +333,46 @@ function performAutoScan() {
   showScanningIndicator();
   
   setTimeout(() => {
-    const result = scanInboxForPhishing();
-    autoScanResults = result;
-    isScanning = false;
-    
-    if (result.success && result.phishingCount > 0) {
-      showPhishingAlert(result);
-    } else if (result.success) {
-      showSafeIndicator();
+    try {
+      const result = scanInboxForPhishing();
+      autoScanResults = result;
+      
+      // Save to extension storage for syncing with website
+      saveToExtensionStorage(result);
+      
+      if (result.success && result.phishingCount > 0) {
+        showPhishingAlert(result);
+      } else if (result.success) {
+        showSafeIndicator();
+      } else {
+        // Scan failed - remove indicator
+        hideScanningIndicator();
+      }
+    } catch (error) {
+      console.error('[FakEye] Auto-scan error:', error);
+      hideScanningIndicator();
+    } finally {
+      isScanning = false;
     }
   }, 2000); // Wait 2 seconds for Gmail to load
 }
 
+// Remove scanning indicator
+function hideScanningIndicator() {
+  const existing = document.getElementById('phishing-scan-indicator');
+  if (existing) {
+    existing.style.transition = 'opacity 0.3s';
+    existing.style.opacity = '0';
+    setTimeout(() => existing.remove(), 300);
+  }
+}
+
 // Show scanning indicator
 function showScanningIndicator() {
+  // Remove any existing indicator first
+  const existing = document.getElementById('phishing-scan-indicator');
+  if (existing) existing.remove();
+  
   const indicator = document.createElement('div');
   indicator.id = 'phishing-scan-indicator';
   indicator.style.cssText = `
@@ -313,6 +391,15 @@ function showScanningIndicator() {
   `;
   indicator.innerHTML = '🔍 Scanning inbox for phishing...';
   document.body.appendChild(indicator);
+  
+  // Safety timeout - remove indicator after 10 seconds max
+  setTimeout(() => {
+    const indicator = document.getElementById('phishing-scan-indicator');
+    if (indicator && indicator.innerHTML.includes('Scanning')) {
+      hideScanningIndicator();
+      isScanning = false;
+    }
+  }, 10000);
 }
 
 // Show phishing alert
@@ -401,23 +488,84 @@ function showSafeIndicator() {
 }
 
 // Initial scan when content script loads
+let initialScanDone = false;
 if (isInboxView()) {
   // Wait for Gmail to fully load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', performAutoScan);
+    document.addEventListener('DOMContentLoaded', () => {
+      performAutoScan();
+      initialScanDone = true;
+    });
   } else {
-    performAutoScan();
+    setTimeout(() => {
+      performAutoScan();
+      initialScanDone = true;
+    }, 1000);
   }
 }
 
-// Listen for navigation changes in Gmail (SPA navigation)
-let lastUrl = location.href;
-new MutationObserver(() => {
-  const url = location.href;
-  if (url !== lastUrl) {
-    lastUrl = url;
-    if (isInboxView() && !isScanning) {
+// Track state for navigation detection
+let lastFirstEmailSubject = '';
+let lastEmailCount = 0;
+
+// Get the first email subject to detect page changes
+function getFirstEmailIdentifier() {
+  const firstEmail = document.querySelector('tr.zA span.bog');
+  return firstEmail ? firstEmail.textContent.trim() : '';
+}
+
+// Get current email count
+function getEmailCount() {
+  return document.querySelectorAll('tr.zA').length;
+}
+
+// Check if user is inside an email (reading it) - check for email view UI elements
+function isInsideEmail() {
+  // Check if the email view pane is visible (Gmail shows email content in a specific container)
+  const emailView = document.querySelector('div.adn.ads') || document.querySelector('div[role="main"] div.nH.if');
+  const emailHeader = document.querySelector('h2.hP');
+  return !!(emailView || emailHeader);
+}
+
+// Detect content changes (page navigation, new emails)
+// This is more reliable than URL watching since Gmail's URL behavior varies
+let contentCheckInterval = setInterval(() => {
+  // Only check if we're in inbox view and not currently scanning
+  if (!isInboxView() || isScanning) return;
+  
+  // Skip if inside an email
+  if (isInsideEmail()) return;
+  
+  const currentFirstEmail = getFirstEmailIdentifier();
+  const currentEmailCount = getEmailCount();
+  
+  // Skip if no emails found (page still loading)
+  if (currentEmailCount === 0 || !currentFirstEmail) return;
+  
+  // First time tracking - just record values
+  if (!lastFirstEmailSubject) {
+    lastFirstEmailSubject = currentFirstEmail;
+    lastEmailCount = currentEmailCount;
+    console.log('[FakEye] Initial tracking:', { firstEmail: currentFirstEmail, count: currentEmailCount });
+    return;
+  }
+  
+  // Detect if first email changed (page change or new email)
+  if (currentFirstEmail !== lastFirstEmailSubject) {
+    console.log('[FakEye] Content changed!', { 
+      old: lastFirstEmailSubject, 
+      new: currentFirstEmail,
+      oldCount: lastEmailCount,
+      newCount: currentEmailCount
+    });
+    
+    lastFirstEmailSubject = currentFirstEmail;
+    lastEmailCount = currentEmailCount;
+    
+    // Trigger scan
+    if (!isScanning) {
+      console.log('[FakEye] Triggering auto-scan due to content change...');
       performAutoScan();
     }
   }
-}).observe(document, { subtree: true, childList: true });
+}, 2000); // Check every 2 seconds

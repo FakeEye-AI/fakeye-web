@@ -33,7 +33,7 @@ archive.on('error', (err) => {
 
 archive.pipe(output);
 
-// Add all files from the extension directory
-archive.directory(extensionDir, 'phishing-email-detector-extension');
+// Add all files from the extension directory directly (no subfolder)
+archive.directory(extensionDir, false);
 
 archive.finalize();
