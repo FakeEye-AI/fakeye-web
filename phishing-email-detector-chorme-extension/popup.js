@@ -2,8 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const scanInboxBtn = document.getElementById('scanInboxBtn');
   const inboxResultsDiv = document.getElementById('inboxResults');
   const statusDiv = document.getElementById('status');
+  const openWebsiteBtn = document.getElementById('openWebsiteBtn');
 
   scanInboxBtn.addEventListener('click', scanInbox);
+  
+  // Open FakEye website button
+  openWebsiteBtn.addEventListener('click', () => {
+    chrome.tabs.create({ url: 'https://fakeye-web.vercel.app' });
+  });
 
   // Check if we're on Gmail and load auto-scan results
   checkGmailTab();

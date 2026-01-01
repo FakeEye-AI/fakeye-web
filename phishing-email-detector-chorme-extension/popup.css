@@ -89,6 +89,50 @@ h1 {
   cursor: not-allowed;
 }
 
+.website-link {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-website {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-website:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-website:active {
+  transform: translateY(0);
+}
+
+.website-icon {
+  font-size: 16px;
+}
+
+.website-hint {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+}
+
 .inbox-results {
   background: #F4F4F4;
   border-radius: 12px;
