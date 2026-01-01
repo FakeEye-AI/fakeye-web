@@ -25,6 +25,7 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID }}
           vercel-project-id: ${{ secrets.PROJECT_ID }}
           vercel-args: '--prod'
+          github-comment: false
       
       - name: Preview URL
         run: echo "Deployed to:" ${{ steps.vercel-deploy.outputs.preview-url }}
