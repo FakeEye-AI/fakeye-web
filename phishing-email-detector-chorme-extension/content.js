@@ -379,7 +379,7 @@ function showScanningIndicator() {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #018790 0%, #00B7B5 100%);
     color: white;
     padding: 12px 20px;
     border-radius: 8px;

@@ -141,8 +141,8 @@ export function ChromeExtension() {
                     Toggle on <strong>"Developer mode"</strong> in the top-right corner.
                   </p>
                   <div className="bg-[#00B7B5]/10 border border-[#00B7B5]/30 rounded-lg p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
                         <Settings className="w-5 h-5 text-[#005461]" />
                         <span className="text-[#005461] font-medium">Developer mode</span>
                       </div>
@@ -183,7 +183,7 @@ export function ChromeExtension() {
               {/* Step 5 - Done */}
               <div className="flex gap-4">
                 <div className="bg-[#00B7B5] text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 font-semibold">
-                  ✓
+                     ✓
                 </div>
                 <div className="flex-1">
                   <h4 className="text-gray-900 mb-2 font-medium">Done! Extension Installed</h4>
@@ -191,7 +191,7 @@ export function ChromeExtension() {
                     You should see the FakEye icon in your Chrome toolbar.
                   </p>
                   <div className="bg-[#00B7B5]/10 border border-[#00B7B5]/30 rounded-lg p-4 flex items-center gap-3">
-                    <div className="bg-white p-2 rounded-lg border border-[#00B7B5]/30">
+                     <div className="bg-white p-2 rounded-lg border border-[#00B7B5]/30">
                       <Puzzle className="w-6 h-6 text-[#018790]" />
                     </div>
                     <div>
@@ -237,14 +237,14 @@ export function ChromeExtension() {
       {showGuide && createPortal(<InstallationGuideModal />, document.body)}
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#005461] to-[#018790] rounded-xl shadow-lg text-white p-8">
+      <div className="bg-gradient-to-br from-[#018790] to-[#00B7B5] rounded-xl shadow-lg text-white p-8">
         <div className="flex items-start gap-4 mb-6">
           <div className="bg-white/20 p-3 rounded-lg">
             <Chrome className="w-8 h-8" />
           </div>
           <div>
             <h2 className="text-white mb-2">Chrome Extension</h2>
-            <p className="text-[#00B7B5]">
+            <p className="text-white/80">
               Real-time phishing detection and email safety checker for Gmail and other email clients
             </p>
           </div>
@@ -260,7 +260,7 @@ export function ChromeExtension() {
           </button>
           <button 
             onClick={() => setShowGuide(true)}
-            className="bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30 transition-colors flex items-center gap-2 font-medium cursor-pointer"
+            className="bg-[#018790] text-white px-6 py-3 rounded-lg hover:[#00B7B5] transition-colors flex items-center gap-2 font-medium cursor-pointer"
           >
             <BookOpen className="w-5 h-5" />
             Installation Guide
