@@ -59,31 +59,31 @@ function AppContent() {
               <nav className="hidden md:flex items-center gap-6">
                 <button 
                   onClick={() => handleNavigate('image')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors cursor-pointer"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Features
                 </button>
                 <button 
                   onClick={() => handleNavigate('extension')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors cursor-pointer"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   How It Works
                 </button>
                 <button 
                   onClick={() => handleNavigate('history')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors cursor-pointer"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Dashboard
                 </button>
                 <button 
                   onClick={() => handleNavigate('community')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors cursor-pointer"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Community
                 </button>
                 <button 
                   onClick={() => handleNavigate('extension')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors cursor-pointer"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Extension
                 </button>

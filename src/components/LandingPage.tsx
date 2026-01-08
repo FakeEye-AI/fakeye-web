@@ -42,7 +42,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={onExtension}
-                className="flex items-center gap-2 bg-[#018790] text-white px-6 py-3 rounded-lg hover:bg-[#005461] transition-colors shadow-lg shadow-[#018790]/20 cursor-pointer"
+                className="flex items-center gap-2 bg-[#00B7B5] text-white px-6 py-3 rounded-lg hover:bg-[#005461] transition-colors shadow-green shadow-[#00B7B5]/20 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download Extension
@@ -56,21 +56,21 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#018790]">
+                <div className="flex items-center gap-2 text-[#00B7B5]">
                   <Users className="w-5 h-5" />
                   <span className="text-2xl">50K+</span>
                 </div>
                 <p className="text-sm text-gray-600">Active Users</p>
               </div>
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#018790]">
+                <div className="flex items-center gap-2 text-[#00B7B5]">
                   <Shield className="w-5 h-5" />
                   <span className="text-2xl">99.2%</span>
                 </div>
                 <p className="text-sm text-gray-600">Accuracy Rate</p>
               </div>
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#018790]">
+                <div className="flex items-center gap-2 text-[#00B7B5]">
                   <Zap className="w-5 h-5" />
                   <span className="text-2xl">&lt;2s</span>
                 </div>
@@ -81,7 +81,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
           {/* Right Content - Analysis Card */}
           <div className="relative">
-            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8 space-y-6">
+            <div className="bg-white rounded-2xl shadow-green border border-gray-200 p-8 space-y-6 animate-float">
               {/* Header */}
               <div className="flex items-center gap-2 pb-4 border-b border-gray-200">
                 <div className="w-10 h-10 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center">
@@ -112,11 +112,11 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
               <div className="space-y-3 pt-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">Confidence Score</span>
-                  <span className="text-2xl text-[#018790]">99.2%</span>
+                  <span className="text-2xl text-[#00B7B5]">99.2%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-gradient-to-r from-[#018790] to-[#00B7B5] h-2 rounded-full transition-all duration-1000"
+                    className="bg-gradient-to-r from-[#00B7B5] to-[#00B7B5] h-2 rounded-full transition-all duration-1000"
                     style={{ width: '99.2%' }}
                   />
                 </div>
@@ -125,13 +125,13 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
             {/* Decorative Elements */}
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#00B7B5]/10 rounded-full blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#018790]/10 rounded-full blur-2xl" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#00B7B5]/10 rounded-full blur-2xl" />
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-gray-900 mb-4">Comprehensive AI Detection</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -155,7 +155,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
           {/* Video Detection */}
           <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-[#018790]/20 rounded-lg flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
@@ -181,7 +181,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
           {/* Email Detection */}
           <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-[#018790]/20 rounded-lg flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
@@ -196,7 +196,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
       {/* CTA Section */}
       <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-[#005461] to-[#018790] rounded-2xl p-12 text-center text-white">
+        <div className="bg-gradient-to-r from-[#018790] to-[#00B7B5] rounded-2xl p-12 text-center text-white">
           <h2 className="text-white mb-4">Ready to Start Detecting?</h2>
           <p className="text-cyan-50 mb-8 max-w-2xl mx-auto">
             Join thousands of users protecting themselves from AI-generated misinformation
@@ -295,8 +295,8 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-8 border-t border-slate-700">
-          <p className="text-center text-sm text-gray-500">
+        <div className="pt-8 border-t border-slate-900">
+          <p className="mb-0 text-center text-sm text-gray-500">
             © 2024 FakeEye. All rights reserved.
           </p>
         </div>
