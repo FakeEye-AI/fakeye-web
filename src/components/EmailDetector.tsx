@@ -297,7 +297,7 @@ export function EmailDetector() {
               </div>
             )}
             <div className="flex-1">
-              <h4 className="text-gray-900 mb-1">
+                <h4 className="text-gray-900 mb-1">
                 {result.isAIGenerated ? 'AI-Generated Content Detected' : 'Human-Written Content'}
               </h4>
               <div className="flex items-center gap-2">

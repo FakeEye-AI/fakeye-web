@@ -2,6 +2,7 @@
       "name": "AI Content Detection Webapp",
       "version": "0.1.0",
       "private": true,
+      "type": "module",
       "dependencies": {
             "@radix-ui/react-accordion": "^1.2.3",
             "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -51,10 +52,12 @@
             "@types/node": "^20.10.0",
             "@types/react": "^19.2.7",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "archiver": "^7.0.1",
             "vite": "6.3.5"
       },
       "scripts": {
-            "dev": "vite",
-            "build": "vite build"
+            "dev": "node scripts/bundle-extension.js && vite",
+            "build": "node scripts/bundle-extension.js && vite build",
+            "bundle-extension": "node scripts/bundle-extension.js"
       }
 }

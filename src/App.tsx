@@ -59,31 +59,31 @@ function AppContent() {
               <nav className="hidden md:flex items-center gap-6">
                 <button 
                   onClick={() => handleNavigate('image')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Features
                 </button>
                 <button 
                   onClick={() => handleNavigate('extension')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   How It Works
                 </button>
                 <button 
                   onClick={() => handleNavigate('history')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Dashboard
                 </button>
                 <button 
                   onClick={() => handleNavigate('community')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Community
                 </button>
                 <button 
                   onClick={() => handleNavigate('extension')}
-                  className="text-[#018790] hover:text-[#005461] transition-colors"
+                  className="text-[#00B7B5] hover:text-[#005461] transition-colors cursor-pointer"
                 >
                   Extension
                 </button>
@@ -104,7 +104,7 @@ function AppContent() {
                   </div>
                   <button
                     onClick={logout}
-                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                   >
                     <LogOut className="w-4 h-4" />
                     <span className="hidden sm:inline">Logout</span>
@@ -113,7 +113,7 @@ function AppContent() {
               ) : (
                 <button
                   onClick={() => handleNavigate('community')}
-                  className="px-6 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors"
+                  className="px-6 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors cursor-pointer"
                 >
                   Sign Up
                 </button>
@@ -122,7 +122,7 @@ function AppContent() {
           </div>
         </header>
 
-        <LandingPage onGetStarted={() => handleNavigate('image')} />
+        <LandingPage onGetStarted={() => handleNavigate('image')} onExtension={() => handleNavigate('extension')} onNavigate={handleNavigate} />
       </div>
     );
   }
@@ -155,7 +155,7 @@ function AppContent() {
                 </div>
                 <button
                   onClick={logout}
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   Logout
@@ -164,7 +164,7 @@ function AppContent() {
             ) : (
               <button
                 onClick={() => handleNavigate('community')}
-                className="flex items-center gap-2 px-4 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-[#018790] text-white rounded-lg hover:bg-[#005461] transition-colors cursor-pointer"
               >
                 <User className="w-4 h-4" />
                 Sign In
@@ -184,7 +184,7 @@ function AppContent() {
                 <button
                   key={tab.id}
                   onClick={() => handleNavigate(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors whitespace-nowrap cursor-pointer ${
                     activeTab === tab.id
                       ? 'border-[#018790] text-[#005461]'
                       : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
