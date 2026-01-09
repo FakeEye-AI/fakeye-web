@@ -1,11 +1,11 @@
 import { Shield, Users, Zap, Download, Play, CheckCircle } from 'lucide-react';
-import Footer from './Footer';
 interface LandingPageProps {
   onGetStarted: () => void;
   onExtension: () => void;
-}
+  onNavigate: (tab: 'image' | 'video' | 'text' | 'email') => void;
+} 
 
-export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
+export function LandingPage({ onGetStarted, onExtension, onNavigate }: Readonly<LandingPageProps>) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F4F4F4] via-white to-cyan-50">
       {/* Hero Section */}
@@ -141,7 +141,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Image Detection */}
-          <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div onClick={() => onNavigate('image')} onKeyDown={(e) => e.key === 'Enter' && onNavigate('image')} role="button" tabIndex={0} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -151,10 +151,10 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             <p className="text-gray-600 text-sm">
               Identify AI-generated images and deepfakes with advanced neural network analysis
             </p>
-          </div>
+          </div> 
 
           {/* Video Detection */}
-          <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div onClick={() => onNavigate('video')} onKeyDown={(e) => e.key === 'Enter' && onNavigate('video')} role="button" tabIndex={0} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -164,10 +164,10 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             <p className="text-gray-600 text-sm">
               Detect manipulated videos and analyze audio for AI-generated content
             </p>
-          </div>
+          </div> 
 
           {/* Text Detection */}
-          <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div onClick={() => onNavigate('text')} onKeyDown={(e) => e.key === 'Enter' && onNavigate('text')} role="button" tabIndex={0} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -177,10 +177,10 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             <p className="text-gray-600 text-sm">
               Analyze text patterns to identify AI-written content from GPT, Claude, and more
             </p>
-          </div>
+          </div> 
 
           {/* Email Detection */}
-          <div className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div onClick={() => onNavigate('email')} onKeyDown={(e) => e.key === 'Enter' && onNavigate('email')} role="button" tabIndex={0} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="w-12 h-12 bg-[#00B7B5]/20 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-[#005461]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -190,7 +190,7 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
             <p className="text-gray-600 text-sm">
               Detect phishing attempts and AI-generated spam emails in real-time
             </p>
-          </div>
+          </div> 
         </div>
       </div>
 

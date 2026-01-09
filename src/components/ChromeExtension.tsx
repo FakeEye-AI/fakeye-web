@@ -146,9 +146,9 @@ export function ChromeExtension() {
                         <Settings className="w-5 h-5 text-[#005461]" />
                         <span className="text-[#005461] font-medium">Developer mode</span>
                       </div>
-                      <div className="w-12 h-6 bg-[#018790] rounded-full relative">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                      </div>
+                      <div className="w-12 h-6 bg-[#018790] rounded-full relative flex items-center">
+  <div className="absolute left-[9px] w-4 h-4 bg-white rounded-full shadow-md"></div>
+</div>
                     </div>
                   </div>
                 </div>

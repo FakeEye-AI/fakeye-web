@@ -122,7 +122,7 @@ function AppContent() {
           </div>
         </header>
 
-        <LandingPage onGetStarted={() => handleNavigate('image')} onExtension={() => handleNavigate('extension')} />
+        <LandingPage onGetStarted={() => handleNavigate('image')} onExtension={() => handleNavigate('extension')} onNavigate={handleNavigate} />
       </div>
     );
   }
