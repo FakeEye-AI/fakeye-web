@@ -47,10 +47,16 @@ export function LandingPage({ onGetStarted, onExtension }: LandingPageProps) {
                 <Download className="w-5 h-5" />
                 Download Extension
               </button>
-              <button className="flex items-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200 cursor-pointer">
-                <Play className="w-5 h-5" />
-                Watch Demo
-              </button>
+              <a
+  href="https://drive.google.com/drive/folders/1_jtd9pvIXPkk_4dZ3V59jus8dj08gnEX?usp=sharing"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200 cursor-pointer"
+>
+  <Play className="w-5 h-5" />
+  Watch Demo
+</a>
+
             </div>
 
             {/* Stats */}
